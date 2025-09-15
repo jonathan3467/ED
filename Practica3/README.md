@@ -1,0 +1,1 @@
+- **Diferencia entre Num y Int**: Por lo que vi que decia ghci, es que Num es cualquier tipo o los agrupa a todos a Int, Float, Double, Integer y Word que no conozco, pero los agrupa a todos, en este caso son enteros y con punto decimal, mientras que Int solamente son numeros enteros ya sean negativos o positivos

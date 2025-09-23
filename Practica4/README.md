@@ -14,13 +14,13 @@ Este se me hizo más facil, aqui damos un natural y nos dan un entero, su caso b
 - Ejercicio 3
 Esta muy facil lo vimos en clase, primero los casos bases, que serian cualquier numero elevado a la cero, es 1, y ahora otro caso base que es cero elevado a cualquier numero esta indefinido por lo que te salta un error, ahora el caso recursivo se va haciendo el ciclo cada vez quitandole un numero al exponente, para al final multiplicarlos, bueno asi nos explico y le entendi al profe
 
--Ejercicio 4
+- Ejercicio 4
 Este es casi igual que el anterior, solamente que su caso base es cuando nos dan cero, pues es 1, porque 0 factorial da 1, ahora el recursivo que es el numero que le diste lo va a multiplicar por n-1, osea le quita 1 y lo multiplica por ese, y asi hasta llegar a 1
 
--Ejecicio 5
+- Ejecicio 5
 aqui no utilizamos caso base debido al auxilicar que dependiendo que matrioska le  demos el ya sabe a que numero representa, entonces utilizando  el auxiliar solamente damos nos  matrioskas por ejemplo Cont (Cont mati) es 2 y (Cont mati) es uno, eso viene en el auxiliar entonces ya solamente le ponemos si es mayor o igual, si es mayor o igual no da true, si no  pues false
 
--Ejercicio 6
+- Ejercicio 6
 aqui como caso base es cuando solamente nos den a mati, pues te regresa mati, aqui tambien podria poner en caso de que no te den nada te salga error pero pues no creo que alguien no de nada, ahora el caso recursivo que la idea que tuve fue que te diera la que estas pidiendo y mediante una  lista vaya juntando las demas pero quitandole una.
 
 ###### Tiempo en realizar la practica  ######

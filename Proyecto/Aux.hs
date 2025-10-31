@@ -1,4 +1,4 @@
-module Aux (Arbol(..), quitarRepetidos, pertenece,contar, ordenafrecuencia, insertar, construir, construirizq) where
+module Aux (Arbol(..), quitarRepetidos, pertenece,contar, ordenafrecuencia, insertar, construir, construirizq,codigosAux) where
 
 data Arbol a = Vacio | AB a (Arbol a) (Arbol a) deriving (Eq, Ord, Show)
 
@@ -57,3 +57,15 @@ construirizq :: [Char] -> Arbol Char
 construirizq [] = Vacio
 construirizq [y] = AB '0' Vacio (AB y Vacio Vacio)
 construirizq (y:ys) = AB '0' (construirizq ys) (AB y Vacio Vacio)
+
+{-
+Aqui va el tercer codigo
+-}
+
+-- auxiliar que construye los códigos binarios recursivamente
+codigosAux :: Arbol Char -> String -> [(Char, String)]
+codigosAux Vacio _ = []
+codigosAux (AB c izq der) codigo
+  | c == 'R' = codigosAux izq (codigo ++ "0") ++ codigosAux der (codigo ++ "1")
+  | c == '0' = codigosAux izq (codigo ++ "0") ++ codigosAux der (codigo ++ "1")
+  | otherwise = [(c, codigo)] ++ codigosAux izq (codigo ++ "0") ++ codigosAux der (codigo ++ "1")

@@ -1,4 +1,4 @@
-module Aux (Arbol(..), quitarRepetidos, pertenece,contar, ordenafrecuencia, insertar, construir, construirizq,codigosAux) where
+module Aux (Arbol(..), quitarRepetidos, pertenece,contar, ordenafrecuencia, insertar, construir, construirizq,codigosAux, decodAux) where
 
 data Arbol a = Vacio | AB a (Arbol a) (Arbol a) deriving (Eq, Ord, Show)
 
@@ -24,14 +24,12 @@ contar c (x:xs)
   | otherwise = contar c xs
 
 -- Ordena las letras segun su frecuencia
-
 ordenafrecuencia :: String -> String -> [Char]
 ordenafrecuencia [] _ = []
 ordenafrecuencia (x:xs) palabra =
   insertar x (ordenafrecuencia xs palabra) palabra
 
 -- Inserta la letra en una lista de mayor a menor frecuencia
-
 insertar :: Char -> [Char] -> String -> [Char]
 insertar c [] palabra = [c]
 insertar c (x:xs) palabra
@@ -69,3 +67,23 @@ codigosAux (AB c izq der) codigo
   | c == 'R' = codigosAux izq (codigo ++ "0") ++ codigosAux der (codigo ++ "1")
   | c == '0' = codigosAux izq (codigo ++ "0") ++ codigosAux der (codigo ++ "1")
   | otherwise = [(c, codigo)] ++ codigosAux izq (codigo ++ "0") ++ codigosAux der (codigo ++ "1")
+
+{-
+Esta va a ser el uxiliar para la cuarta funcion y ultima, que lo que hace es
+recorrer el arbol segun los bits que le demos, donde si llegamos a una hoja la agregamos y regresamos a la raiz, si el bit es 0 vamos a la izquierda, si es 1 vamos a la derecha
+-}
+
+decodAux :: Arbol Char -> String -> Arbol Char -> String
+-- si ya no hay bits pero estamos en una hoja devolvemos esa letra
+decodAux (AB r izq der) [] _
+  | r /= 'R' && r /= '0' && izq == Vacio && der == Vacio = [r]
+decodAux _ [] _ = []
+decodAux (AB r izq der) (b:bs) raiz
+-- si llegamos a una letra la agregamos y regresamos a la raiz
+  | r /= 'R' && r /= '0' && izq == Vacio && der == Vacio = r : decodAux raiz (b:bs) raiz
+  -- si el bit es 0 ahora pa la izquierda
+  | b == '0' = decodAux izq bs raiz
+  -- si el bit es 1 vamos pa la derecha
+  | b == '1' = decodAux der bs raiz
+  -- en otro caso pues vacio
+  | otherwise = []

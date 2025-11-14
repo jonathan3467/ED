@@ -1,6 +1,26 @@
-module Aux (Arbol(..), quitarRepetidos, pertenece,contar, ordenafrecuencia, insertar, construir, construirizq,codigosAux, decodAux) where
+module Aux (Arbol(..),contarFrecuencias, frecuencias, quitarRepetidos, pertenece,contar, ordenafrecuencia, insertar, construir, construirizq,codigosAux, decodAux) where
 
 data Arbol a = Vacio | AB a (Arbol a) (Arbol a) deriving (Eq, Ord, Show)
+
+{-
+Estos seran auxiliares para una funcion extra aunque no muy necesaria, pero es
+para que quede claro como queda la lista y cuantas veces se repite cada una
+-}
+-- recorre las letras sin repeteir y cuenta cuantas veces aparece cada una
+contarFrecuencias :: String -> String -> [(Char, Int)]
+contarFrecuencias [] _ = []
+contarFrecuencias (x:xs) palabra = (x, contar x palabra) : contarFrecuencias xs palabra
+
+--le pasas una frase o palabra y regresa una lista con cada eltra y cuentas beves aparece
+
+frecuencias :: String -> [(Char, Int)]
+frecuencias [] = []
+frecuencias palabra = contarFrecuencias (quitarRepetidos palabra) palabra
+
+{-
+Estas son funciones auxiliares para en si a primera funcion que nos ayuda a
+todos los demas codigos 
+-}
 
 -- quita las letas repetidas
 quitarRepetidos :: Eq a => [a] -> [a]
@@ -36,10 +56,6 @@ insertar c (x:xs) palabra
   | contar c palabra >= contar x palabra = c : x : xs
   | otherwise = x : insertar c xs palabra
 
-frecuenciaLetras :: String -> [Char]
-frecuenciaLetras [] = []
-frecuenciaLetras palabra = ordenafrecuencia (quitarRepetidos palabra) palabra
-
 -- Todo lo anterior es para lo primero que es darle una palabra y que te
 --regrese la lista de mayor a menor frecuencia dependiendo la letra
 
@@ -57,7 +73,7 @@ construirizq [y] = AB '0' Vacio (AB y Vacio Vacio)
 construirizq (y:ys) = AB '0' (construirizq ys) (AB y Vacio Vacio)
 
 {-
-Aqui va el tercer codigo
+Este es el auxiliar para la tercera funcion
 -}
 
 -- auxiliar que construye los códigos binarios recursivamente
